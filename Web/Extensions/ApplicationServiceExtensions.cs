@@ -26,7 +26,7 @@ namespace Web.Extensions
             services.AddSingleton<RandomGeneratorViaAPISettings>(generatorApisettings);
 
             // Config for AWS Lambda connection
-            var awsConnectionSettings = configuration.GetSection("AWSConnectionSettings").Get<LambdaConnectionSettings>();
+            var awsConnectionSettings = configuration.GetSection("AWSLambdaConnectionSettings").Get<LambdaConnectionSettings>();
             services.AddSingleton(awsConnectionSettings);
 
             services.AddSingleton<RandomGeneratorLocal>();

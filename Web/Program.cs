@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using System;
 
 namespace Web
 {
@@ -13,14 +15,19 @@ namespace Web
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureLogging(logging =>
-                {
-                    logging.ClearProviders();
-                    logging.AddConsole();
-                })
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
+            .ConfigureAppConfiguration((context, config) =>
+            {
+                var env = context.HostingEnvironment.EnvironmentName.ToLower();
+                config.AddSystemsManager($"/calculator/{env}/", TimeSpan.FromMinutes(5));
+            })
+            .ConfigureLogging(logging =>
+            {
+                logging.ClearProviders();
+                logging.AddConsole();
+            })
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+                webBuilder.UseStartup<Startup>();
+            });
     }
 }
