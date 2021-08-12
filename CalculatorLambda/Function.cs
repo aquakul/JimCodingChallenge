@@ -42,8 +42,7 @@ namespace CalculatorLambda
                 case "/":
                 case "divide":
                     return Divide(input);
-                default:
-                    //callback("400 Invalid Operator");
+                default:                    
                     return 0;
             }
         }

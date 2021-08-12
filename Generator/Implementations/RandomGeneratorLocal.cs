@@ -14,7 +14,7 @@ namespace Generator.Implementations
             
         // };
 
-        private static Random random = new Random();
+        private static readonly Random random = new();
 
         public static string Name => "local";
 
@@ -36,7 +36,7 @@ namespace Generator.Implementations
                 values[i] = random.Next(min, max);
             }
 
-            return Task.FromResult<int[]>(values);
+            return Task.FromResult(values);
         }
     }
 }

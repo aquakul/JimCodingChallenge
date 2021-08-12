@@ -2,6 +2,9 @@ using System.Threading.Tasks;
 
 namespace Generator.Interfaces
 {
+    // delegate which takes in a key and resolves to one of the implementations of the service based on the key
+    public delegate IGenerator GeneratorResolver(string key);
+
     /// <summary>
     /// This is a generic interface that outlines the required methods for a random number generator service
     /// </summary>

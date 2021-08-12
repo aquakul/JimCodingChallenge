@@ -19,7 +19,7 @@ namespace Test
         [InlineData(new int[1] { 1 })]
         public void Add_InValidValues(int[] input)
         {
-            var lambdaSettings = new LambdaConnectionSettings() { AccessKey = "abcd", Secret = "abcd", Region = "cds" };
+            //var lambdaSettings = new LambdaConnectionSettings() { AccessKey = "abcd", Secret = "abcd", Region = "cds" };
             var lambda = new Mock<ICloudCalculateService>();
             var add = new Add(lambda.Object);
 
@@ -33,7 +33,7 @@ namespace Test
         [InlineData(new int[3] { 1, 2, 3 })]
         public void Subtract_InValidValues(int[] input)
         {
-            var lambdaSettings = new LambdaConnectionSettings() { AccessKey = "abcd", Secret = "abcd", Region = "cds" };
+            //var lambdaSettings = new LambdaConnectionSettings() { AccessKey = "abcd", Secret = "abcd", Region = "cds" };
 
             var lambda = new Mock<ICloudCalculateService>();
             var subtract = new Subtract(lambda.Object);

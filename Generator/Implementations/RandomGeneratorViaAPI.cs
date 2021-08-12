@@ -33,8 +33,6 @@ namespace Generator.Implementations
         /// <returns></returns>
         public async Task<int[]> Generate(int min = 0, int max = 1000, int howMany = 2)
         {
-            var request = new HttpRequestMessage(HttpMethod.Get, "");
-
             var queryParams = new Dictionary<string, string>() 
             {
                 { "min", min + "" },
@@ -44,10 +42,8 @@ namespace Generator.Implementations
 
             string url = QueryHelpers.AddQueryString(_options.URL, queryParams);
 
-            _client.BaseAddress = new Uri(url);
-
             try {
-                var response = await _client.SendAsync(request);
+                var response = await _client.GetAsync(url);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -57,10 +53,10 @@ namespace Generator.Implementations
             }
             catch(Exception)
             {
-                // blanket catching all exceptions. Log it                
+                // blanket catching all exceptions. Log it and may be fallback to something instead of returning empty
             }            
 
-            return new int[0];
+            return Array.Empty<int>();
         }
     }
 }

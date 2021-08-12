@@ -12,12 +12,6 @@ namespace Web.Extensions
 {
     public static class ApplicationServiceExtensions
     {
-        // delegate which takes in a key and resolves to one of the implementations of the service based on the key
-        //public delegate IStrategy OperationResolver(string key);
-
-        // delegate which takes in a key and resolves to one of the implementations of the service based on the key
-        //public delegate IGenerator GeneratorResolver(string key);
-
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration configuration)
         {
             // this is the default random generator selector config if the caller does not specify any. Set in the config
@@ -31,15 +25,15 @@ namespace Web.Extensions
             var awsConnectionSettings = configuration.GetSection("AWSLambdaConnectionSettings").Get<LambdaConnectionSettings>();
             services.AddSingleton(awsConnectionSettings);
 
-            services.AddSingleton<RandomGeneratorLocal>();
-            services.AddScoped<RandomGeneratorViaAPI>();
+            services.AddSingleton<IGenerator, RandomGeneratorLocal>();
+            services.AddScoped<IGenerator, RandomGeneratorViaAPI>();
 
             services.AddSingleton<ICloudCalculateService, AWSLambdaCalculateService>();
 
-            services.AddSingleton<Add>();
-            services.AddSingleton<Subtract>();
-            services.AddSingleton<Multiply>();
-            services.AddSingleton<Divide>();
+            services.AddSingleton<IStrategy, Add>();
+            services.AddSingleton<IStrategy, Subtract>();
+            services.AddSingleton<IStrategy, Multiply>();
+            services.AddSingleton<IStrategy, Divide>();
 
 
             // register a factory to return the generator based on the key.

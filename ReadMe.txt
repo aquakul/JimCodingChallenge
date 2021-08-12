@@ -33,6 +33,24 @@ Input query paramters are  -
 'source' which currently supports values - local and api. Anything else passed would throw 400
 
 Things that can be added - 
-Put a Console App
-Extend the support for double type
+
+
+Put a Console App - This is done
+Extend the support for double type or other numeric types
 ENUMize the controller input(With GET)
+Integrate outgoing Http calls with a resilient library like Polly to introduce things like Retry, fail fast etc.
+Create wrapper Web services around the generator and operator core libraries, so that they can be independently deployed, maintained
+
+
+AWS parameter store vs secrets manager
+
+Went for parameter store because it's free :)
+But otherwise secrets manager is more robust - Cross account access, secrets rotation
+
+
+What design patterns are used in this code -
+1. Separation of concern
+2. Factory pattern
+3. Decorator pattern
+
+

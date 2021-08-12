@@ -1,5 +1,8 @@
 namespace Operator
 {
+    // delegate which takes in a key and resolves to one of the implementations of the service based on the key
+    public delegate IStrategy OperationResolver(string key);
+
     public interface IStrategy
     {
         // some sensible name for the strategy.
